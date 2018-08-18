@@ -49,8 +49,8 @@ app.listen(PORT, () => {
     const bs = browserSync.create()
     bs.init({
       files: ['../dist/**/*'],
-      online: false,
       open: false,
+      online: false,
       port: PORT + 1,
       proxy: 'localhost:' + PORT,
       ui: false
