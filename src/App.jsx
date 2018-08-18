@@ -24,6 +24,11 @@ class App extends React.Component {
         <Layout sidebar={<Sidebar />}>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/games/:id"
+              component={Articles.components.View}
+            />
             <Route path="*" render={() => <h1>404</h1>} />
           </Switch>
         </Layout>

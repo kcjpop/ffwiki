@@ -1,8 +1,8 @@
 import req from '@/helpers/req'
 
-export const LOAD_GAME_LIST = 'ARTICLES/LOAD_GAME_LISTS'
+export const LOAD_GAME_LIST = 'ARTICLES/LOAD_LISTS'
 export function loadGameList() {
-  return dipatch =>
+  return dispatch =>
     req
       .get('/Articles/List', {
         params: {
@@ -11,12 +11,24 @@ export function loadGameList() {
           expand: 1
         }
       })
-      .then(({ data }) => {
-        dipatch({
+      .then(({ data }) =>
+        dispatch({
           type: LOAD_GAME_LIST,
           payload: {
             list: data.items
           }
         })
+      )
+}
+
+export const SET_CONTENT = 'ARTICLES/SET_CONTENT'
+export function loadContent(id) {
+  return dispatch =>
+    req
+      .get('/Articles/AsSimpleJson', {
+        params: { id }
       })
+      .then(({ data }) =>
+        dispatch({ type: SET_CONTENT, payload: { id, content: data } })
+      )
 }

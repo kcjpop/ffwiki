@@ -1,14 +1,25 @@
-import { LOAD_GAME_LIST } from './actions'
+import keyBy from 'lodash/keyBy'
+import { LOAD_GAME_LIST, SET_CONTENT } from './actions'
 
 export default function(
   state = {
-    list: []
+    list: [],
+    byId: {},
+    content: {}
   },
   { type, payload }
 ) {
   switch (type) {
     case LOAD_GAME_LIST:
-      return Object.assign({}, state, payload)
+      return Object.assign({}, state, {
+        list: payload.list,
+        byId: keyBy(payload.list, item => item.id)
+      })
+    case SET_CONTENT:
+      const content = Object.assign({}, state.content, {
+        [payload.id]: payload.content
+      })
+      return Object.assign({}, state, { content })
     default:
       return state
   }

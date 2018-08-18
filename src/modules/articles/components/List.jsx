@@ -18,7 +18,7 @@ class List extends React.Component {
         <ul className="list ma0 pl3">
           {list.map(item => (
             <li key={item.id}>
-              <Link className="lh-copy dark-gray" to={item.url}>
+              <Link className="lh-copy dark-gray" to={`/games/${item.id}`}>
                 {item.title}
               </Link>
             </li>
