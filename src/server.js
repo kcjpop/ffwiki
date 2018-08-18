@@ -1,11 +1,11 @@
 import path from 'path'
 
 import express from 'express'
+import serveStatic from 'serve-static'
 import browserSync from 'browser-sync'
 
-const serveStatic = require('serve-static')
-
 import React from 'react'
+import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 
 import App from '@/App'
@@ -16,6 +16,7 @@ function htmlTemplate(reactDom) {
 <head>
   <meta charset="utf-8">
   <title>Final Fantasy Simple Wiki</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" />
 </head>
 <body>
   <div id="app">${reactDom}</div>
@@ -32,8 +33,15 @@ const PORT = 3000
 app.use(serveStatic(path.resolve('dist')))
 
 app.get('/*', (req, res) => {
+  const context = {}
+  const jsx = (
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  )
+
   res.writeHead(200, { 'Content-Type': 'text/html' })
-  res.end(htmlTemplate(renderToString(<App />)))
+  res.end(htmlTemplate(renderToString(jsx)))
 })
 
 app.listen(PORT, () => {
