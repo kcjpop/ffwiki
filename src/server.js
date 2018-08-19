@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 
 import express from 'express'
 import serveStatic from 'serve-static'
@@ -10,7 +11,24 @@ import { renderToString } from 'react-dom/server'
 
 import App from '@/App'
 
-function htmlTemplate(reactDom) {
+const PRODUCTION = process.env.NODE_ENV === 'production'
+const PORT = 3000
+
+// Read client manifest file
+const MANIFEST = !PRODUCTION ? {} : readManifestFile()
+
+function readManifestFile() {
+  const p = path.resolve('./dist/manifest.json')
+  if (!fs.existsSync(p)) throw Error(`Cannot read manifest from path ${p}`)
+
+  return JSON.parse(fs.readFileSync(p))
+}
+
+function getManifestFile(manifest, path) {
+  return manifest[path] || path
+}
+
+function htmlTemplate(reactDom, manifest) {
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -20,16 +38,13 @@ function htmlTemplate(reactDom) {
 </head>
 <body>
   <div id="app">${reactDom}</div>
-  <script src="/client.js"></script>
-  <script src="/vendors~client.js"></script>
+  <script src="${getManifestFile(manifest, 'client.js')}"></script>
+  <script src="${getManifestFile(manifest, 'vendors~client.js')}"></script>
 </body>
 </html>`
 }
 
 const app = express()
-
-const PRODUCTION = process.env.NODE_ENV === 'production'
-const PORT = 3000
 
 app.use(serveStatic(path.resolve('dist')))
 
@@ -42,7 +57,7 @@ app.get('/*', (req, res) => {
   )
 
   res.writeHead(200, { 'Content-Type': 'text/html' })
-  res.end(htmlTemplate(renderToString(jsx)))
+  res.end(htmlTemplate(renderToString(jsx), MANIFEST))
 })
 
 app.listen(PORT, () => {
