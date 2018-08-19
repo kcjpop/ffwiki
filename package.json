@@ -16,6 +16,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.24.6",
     "nodemon": "^1.18.3",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
     "react": "^16.4.2",
