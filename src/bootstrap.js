@@ -19,5 +19,8 @@ export const store = createStore(
   applyMiddleware(...reduxMiddlewares)
 )
 
+// Fetch initial data
+store.dispatch(Articles.actions.loadGameList())
+
 // Combine all routes
 export const routes = [...Articles.routes, ...Pages.routes]

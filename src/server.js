@@ -94,13 +94,7 @@ app.get('/*', (req, res) => {
     const redux = store.getState()
 
     res.writeHead(200, { 'Content-Type': 'text/html' })
-    res.end(
-      toHtml(reactDom, {
-        helmet,
-        redux,
-        manifest: MANIFEST
-      })
-    )
+    res.end(toHtml(reactDom, { helmet, redux, manifest: MANIFEST }))
   })
 })
 
