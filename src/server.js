@@ -34,6 +34,13 @@ function getManifestFile(manifest, path) {
 }
 
 function toHtml(reactDom, { manifest, helmet, redux }) {
+  const vendors = PRODUCTION
+    ? `<script src="${getManifestFile(
+        manifest,
+        'vendors~client.js'
+      )}"></script>`
+    : null
+
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +56,7 @@ function toHtml(reactDom, { manifest, helmet, redux }) {
 window.__REDUX_DATA__ = ${JSON.stringify(redux)}
   </script>
   <script src="${getManifestFile(manifest, 'client.js')}"></script>
-  <script src="${getManifestFile(manifest, 'vendors~client.js')}"></script>
+  ${vendors}
 </body>
 </html>`
 }
