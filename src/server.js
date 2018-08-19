@@ -6,6 +6,7 @@ import serveStatic from 'serve-static'
 import browserSync from 'browser-sync'
 
 import React from 'react'
+import Helmet from 'react-helmet'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 
@@ -28,13 +29,15 @@ function getManifestFile(manifest, path) {
   return manifest[path] || `/${path}`
 }
 
-function htmlTemplate(reactDom, manifest) {
+function htmlTemplate(reactDom, { manifest, helmet }) {
   return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Final Fantasy Simple Wiki</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" />
+  ${helmet.title.toString()}
+  ${helmet.meta.toString()}
+  ${helmet.link.toString()}
 </head>
 <body>
   <div id="app">${reactDom}</div>
@@ -55,9 +58,16 @@ app.get('/*', (req, res) => {
       <App />
     </StaticRouter>
   )
+  const reactDom = renderToString(jsx)
+  const helmet = Helmet.renderStatic()
 
   res.writeHead(200, { 'Content-Type': 'text/html' })
-  res.end(htmlTemplate(renderToString(jsx), MANIFEST))
+  res.end(
+    htmlTemplate(reactDom, {
+      helmet,
+      manifest: MANIFEST
+    })
+  )
 })
 
 app.listen(PORT, () => {

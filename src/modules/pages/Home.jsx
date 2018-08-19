@@ -1,8 +1,12 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 
 export default function() {
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Home :: Simple Final Fantasy Wiki</title>
+      </Helmet>
       <h1>Welcome to Simple Final Fantasy Wiki</h1>
       <p className="lh-copy">
         There is nothing fancy here. Just pick a title and you are good to go.
