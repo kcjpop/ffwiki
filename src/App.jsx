@@ -7,6 +7,7 @@ import createStore from './createStore'
 import Layout from '@/modules/ui/Layout'
 
 import Home from '@/modules/pages/Home'
+import NotFound from '@/modules/pages/NotFound'
 
 // Feature modules
 import * as Articles from '@/modules/articles'
@@ -29,7 +30,7 @@ class App extends React.Component {
               path="/games/:id"
               component={Articles.components.View}
             />
-            <Route path="*" render={() => <h1>404</h1>} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </Layout>
       </Provider>
