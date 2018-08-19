@@ -17,7 +17,7 @@ class List extends React.Component {
         {list.map(item => (
           <li key={item.id}>
             <Link
-              className="lh-copy moon-gray no-underline"
+              className="lh-copy moon-gray no-underline db"
               to={`/games/${item.id}`}
             >
               {item.title}
