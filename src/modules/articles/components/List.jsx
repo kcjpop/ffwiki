@@ -13,18 +13,18 @@ class List extends React.Component {
     if (list.length === 0) return <p>Loading</p>
 
     return (
-      <React.Fragment>
-        <h1>Games</h1>
-        <ul className="list ma0 pl3">
-          {list.map(item => (
-            <li key={item.id}>
-              <Link className="lh-copy dark-gray" to={`/games/${item.id}`}>
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </React.Fragment>
+      <ul className="list mv3 pl0">
+        {list.map(item => (
+          <li key={item.id}>
+            <Link
+              className="lh-copy moon-gray no-underline"
+              to={`/games/${item.id}`}
+            >
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     )
   }
 }

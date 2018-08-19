@@ -5,7 +5,7 @@ export default function(props) {
     <div>
       <h2>{props.title}</h2>
       {props.content.map((p, index) => (
-        <p className="lh-copy" key={index}>
+        <p className="lh-copy baskerville" key={index}>
           {p.text}
         </p>
       ))}

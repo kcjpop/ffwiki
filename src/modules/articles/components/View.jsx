@@ -45,7 +45,7 @@ class View extends React.Component {
 
     return (
       <div>
-        <h1>{game.title}</h1>
+        <h1 className="f2 mv3">{game.title}</h1>
         {content.sections.map(section => (
           <Section key={section.title} {...section} />
         ))}
