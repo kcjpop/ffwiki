@@ -46,6 +46,7 @@ function toHtml(reactDom, { manifest, helmet, redux }) {
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinners/1-rotating-plane.min.css" />
   ${helmet.title.toString()}
   ${helmet.meta.toString()}
   ${helmet.link.toString()}

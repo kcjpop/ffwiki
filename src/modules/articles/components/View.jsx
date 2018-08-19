@@ -8,6 +8,8 @@ import { loadContent } from '../actions'
 import Section from './Section'
 import Image from './Image'
 
+import Loader from '@/modules/ui/Loader'
+
 class View extends React.Component {
   state = { loading: false }
 
@@ -40,13 +42,11 @@ class View extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <p>Loading</p>
-
     const content = this.getContentFromStore() || { sections: [] }
     const game = this.getGameFromStore() || {}
 
     return (
-      <div>
+      <Loader loading={this.state.loading}>
         <Helmet>
           <title>{`${game.title} :: Simple Final Fantasy Wiki`}</title>
         </Helmet>
@@ -55,7 +55,7 @@ class View extends React.Component {
         {content.sections.map((section, index) => (
           <Section key={section.title + index} {...section} />
         ))}
-      </div>
+      </Loader>
     )
   }
 }
