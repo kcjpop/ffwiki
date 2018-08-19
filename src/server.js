@@ -21,6 +21,7 @@ function htmlTemplate(reactDom) {
 <body>
   <div id="app">${reactDom}</div>
   <script src="/client.js"></script>
+  <script src="/vendors~client.js"></script>
 </body>
 </html>`
 }
@@ -56,4 +57,5 @@ app.listen(PORT, () => {
       ui: false
     })
   }
+  console.log(`Server is running at http://localhost:${PORT}`)
 })

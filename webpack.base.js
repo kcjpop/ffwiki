@@ -13,6 +13,7 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
   module: {
     rules: [
       {
