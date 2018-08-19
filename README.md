@@ -3,3 +3,5 @@
 ### Simple FF Wiki
 
 SSR-ed React app showing content from Final Fantasy Wikia.
+
+:point_right: [https://ffwiki-ngcrlnwdof.now.sh/](https://ffwiki-ngcrlnwdof.now.sh/)
