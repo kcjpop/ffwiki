@@ -25,7 +25,7 @@ function readManifestFile() {
 }
 
 function getManifestFile(manifest, path) {
-  return manifest[path] || path
+  return manifest[path] || `/${path}`
 }
 
 function htmlTemplate(reactDom, manifest) {

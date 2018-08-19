@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -46,6 +47,9 @@ class View extends React.Component {
 
     return (
       <div>
+        <Helmet>
+          <title>{`${game.title} :: Simple Final Fantasy Wiki`}</title>
+        </Helmet>
         <h1 className="f2 mv3">{game.title}</h1>
         <Image src={game.thumbnail} alt={game.title} caption={game.title} />
         {content.sections.map((section, index) => (
