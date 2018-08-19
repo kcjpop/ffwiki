@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { loadContent } from '../actions'
 
 import Section from './Section'
+import Image from './Image'
 
 class View extends React.Component {
   state = { loading: false }
@@ -46,6 +47,7 @@ class View extends React.Component {
     return (
       <div>
         <h1 className="f2 mv3">{game.title}</h1>
+        <Image src={game.thumbnail} alt={game.title} caption={game.title} />
         {content.sections.map(section => (
           <Section key={section.title} {...section} />
         ))}
