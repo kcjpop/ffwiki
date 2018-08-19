@@ -7,7 +7,7 @@ import browserSync from 'browser-sync'
 
 import React from 'react'
 import Helmet from 'react-helmet'
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter, matchPath } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 
 import App from '@/App'
