@@ -48,8 +48,8 @@ class View extends React.Component {
       <div>
         <h1 className="f2 mv3">{game.title}</h1>
         <Image src={game.thumbnail} alt={game.title} caption={game.title} />
-        {content.sections.map(section => (
-          <Section key={section.title} {...section} />
+        {content.sections.map((section, index) => (
+          <Section key={section.title + index} {...section} />
         ))}
       </div>
     )

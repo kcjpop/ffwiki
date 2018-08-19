@@ -7,16 +7,14 @@ export default function(props) {
       <h2>{props.title}</h2>
 
       {props.content.map((p, index) => (
-        <React.Fragment>
+        <React.Fragment key={index}>
           {props.images[index] != null ? (
             <Image
               {...props.images[index]}
               position={index % 2 ? 'left' : 'right'}
             />
           ) : null}
-          <p className="lh-copy baskerville" key={index}>
-            {p.text}
-          </p>
+          <p className="lh-copy baskerville">{p.text}</p>
         </React.Fragment>
       ))}
     </div>
