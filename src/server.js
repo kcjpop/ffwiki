@@ -9,13 +9,17 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticRouter, matchPath } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
+import { Provider as ReduxProvider } from 'react-redux'
+
+import { store, routes } from './bootstrap'
 
 import App from '@/App'
 
 const PRODUCTION = process.env.NODE_ENV === 'production'
 const PORT = 3000
 
-// Read client manifest file
+// Prepare frontend  manifest file
+
 const MANIFEST = !PRODUCTION ? {} : readManifestFile()
 
 function readManifestFile() {
@@ -29,7 +33,7 @@ function getManifestFile(manifest, path) {
   return manifest[path] || `/${path}`
 }
 
-function htmlTemplate(reactDom, { manifest, helmet }) {
+function toHtml(reactDom, { manifest, helmet, redux }) {
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -41,33 +45,56 @@ function htmlTemplate(reactDom, { manifest, helmet }) {
 </head>
 <body>
   <div id="app">${reactDom}</div>
+  <script>
+window.__REDUX_DATA__ = ${JSON.stringify(redux)}
+  </script>
   <script src="${getManifestFile(manifest, 'client.js')}"></script>
   <script src="${getManifestFile(manifest, 'vendors~client.js')}"></script>
 </body>
 </html>`
 }
 
+// Create express instance
+
 const app = express()
 
 app.use(serveStatic(path.resolve('dist')))
 
 app.get('/*', (req, res) => {
-  const context = {}
-  const jsx = (
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>
-  )
-  const reactDom = renderToString(jsx)
-  const helmet = Helmet.renderStatic()
-
-  res.writeHead(200, { 'Content-Type': 'text/html' })
-  res.end(
-    htmlTemplate(reactDom, {
-      helmet,
-      manifest: MANIFEST
+  // Prefetch data to fill in Redux store
+  const promises = routes
+    .map(route => {
+      const match = matchPath(req.url, route)
+      return { match, route }
     })
-  )
+    .filter(
+      ({ match, route }) =>
+        match != null && route.server && route.server.prefetchData
+    )
+    .map(({ match, route }) => route.server.prefetchData(store, match))
+
+  return Promise.all(promises).then(() => {
+    const context = {}
+    const jsx = (
+      <ReduxProvider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          <App />
+        </StaticRouter>
+      </ReduxProvider>
+    )
+    const reactDom = renderToString(jsx)
+    const helmet = Helmet.renderStatic()
+    const redux = store.getState()
+
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.end(
+      toHtml(reactDom, {
+        helmet,
+        redux,
+        manifest: MANIFEST
+      })
+    )
+  })
 })
 
 app.listen(PORT, () => {

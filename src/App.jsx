@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Provider, connect } from 'react-redux'
+import { Provider } from 'react-redux'
 
 import Layout from '@/modules/ui/Layout'
 import Sidebar from '@/modules/articles/components/List'
@@ -13,7 +13,10 @@ class App extends React.Component {
       <Provider store={store}>
         <Layout sidebar={<Sidebar />}>
           <Switch>
-            {routes.map(route => <Route key={route.path} {...route} />)}
+            {routes.map(({ server, ...route }) => (
+              // Extract server configuration out
+              <Route key={route.path} {...route} />
+            ))}
           </Switch>
         </Layout>
       </Provider>
