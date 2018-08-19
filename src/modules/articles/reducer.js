@@ -10,16 +10,18 @@ export default function(
   { type, payload }
 ) {
   switch (type) {
-    case LOAD_LIST:
+    case LOAD_LIST: {
       return Object.assign({}, state, {
         list: payload.list,
         byId: keyBy(payload.list, item => item.id)
       })
-    case SET_CONTENT:
+    }
+    case SET_CONTENT: {
       const content = Object.assign({}, state.content, {
         [payload.id]: payload.content
       })
       return Object.assign({}, state, { content })
+    }
     default:
       return state
   }
