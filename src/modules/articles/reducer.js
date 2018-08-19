@@ -1,5 +1,5 @@
 import keyBy from 'lodash/keyBy'
-import { LOAD_GAME_LIST, SET_CONTENT } from './actions'
+import { LOAD_LIST, SET_CONTENT } from './actions'
 
 export default function(
   state = {
@@ -10,7 +10,7 @@ export default function(
   { type, payload }
 ) {
   switch (type) {
-    case LOAD_GAME_LIST:
+    case LOAD_LIST:
       return Object.assign({}, state, {
         list: payload.list,
         byId: keyBy(payload.list, item => item.id)

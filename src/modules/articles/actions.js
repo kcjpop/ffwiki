@@ -1,6 +1,6 @@
 import req from '@/helpers/req'
 
-export const LOAD_GAME_LIST = 'ARTICLES/LOAD_LISTS'
+export const LOAD_LIST = 'ARTICLES/LOAD_LISTS'
 export function loadGameList() {
   return dispatch =>
     req
@@ -13,7 +13,7 @@ export function loadGameList() {
       })
       .then(({ data }) =>
         dispatch({
-          type: LOAD_GAME_LIST,
+          type: LOAD_LIST,
           payload: {
             list: data.items
           }
