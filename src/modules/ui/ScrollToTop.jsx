@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
-export default withRouter(
+const ScrollToTop = withRouter(
   class extends React.Component {
     componentDidUpdate(prevProps) {
       if (this.props.location !== prevProps.location) {
@@ -14,3 +15,9 @@ export default withRouter(
     }
   }
 )
+
+ScrollToTop.propTypes = {
+  children: PropTypes.element.isRequired
+}
+
+export default ScrollToTop

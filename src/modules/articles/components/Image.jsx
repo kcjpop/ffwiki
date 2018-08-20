@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-export default function(props) {
+function Image(props) {
   const { className, position, caption, alt, src, ...rest } = props
   const left = position === 'left'
   return (
@@ -20,3 +21,12 @@ export default function(props) {
     </div>
   )
 }
+
+Image.propTypes = {
+  position: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  caption: PropTypes.string,
+  alt: PropTypes.string
+}
+
+export default Image

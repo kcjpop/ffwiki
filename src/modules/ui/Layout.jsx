@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function(props) {
+function Layout(props) {
   return (
     <div className="flex flex-column-reverse flex-row-l serif f4">
       <div className="w-25-l bg-dark-gray pa3">{props.sidebar}</div>
@@ -8,3 +9,10 @@ export default function(props) {
     </div>
   )
 }
+
+Layout.propTypes = {
+  sidebar: PropTypes.element,
+  children: PropTypes.element.isRequired
+}
+
+export default Layout

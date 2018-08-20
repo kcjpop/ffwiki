@@ -10,7 +10,8 @@
     "server:watch": "webpack --config webpack.server.js --watch",
     "server:start": "nodemon dist/server.js",
     "client": "webpack --config webpack.client.js --watch",
-    "build": "rimraf dist/ && NODE_ENV=production npm-run-all --sequential build:client build:server",
+    "build":
+      "rimraf dist/ && NODE_ENV=production npm-run-all --sequential build:client build:server",
     "build:server": "webpack --config webpack.server.js",
     "build:client": "webpack --config webpack.client.prod.js",
     "start": "NODE_ENV=production node dist/server.js"
@@ -42,6 +43,7 @@
     "classnames": "^2.2.6",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
