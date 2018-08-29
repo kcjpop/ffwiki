@@ -8,8 +8,8 @@ function Image(props) {
   return (
     <div
       className={classnames(
-        'w5 pa3 b--light-gray',
-        { 'fl br mr3': left, 'fr bl ml3': !left },
+        'w5 pa3 b--light-gray db center',
+        { 'fl-ns br-ns mr3-ns': left, 'fr-ns bl-ns ml3-ns': !left },
         className
       )}
       {...rest}
