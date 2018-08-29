@@ -1,6 +1,7 @@
 import View from './components/View'
 
 import { loadContent } from './actions'
+import req from '@/helpers/req'
 
 export default [
   {
@@ -9,7 +10,7 @@ export default [
     component: View,
     server: {
       prefetchData: (store, match) =>
-        store.dispatch(loadContent(match.params.id)).catch(console.error)
+        store.dispatch(loadContent(req, match.params.id)).catch(console.error)
     }
   }
 ]

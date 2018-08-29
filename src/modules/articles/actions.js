@@ -1,7 +1,5 @@
-import req from '@/helpers/req'
-
 export const LOAD_LIST = 'ARTICLES/LOAD_LISTS'
-export function loadGameList() {
+export function loadGameList(req) {
   return dispatch =>
     req
       .get('/Articles/List', {
@@ -22,7 +20,7 @@ export function loadGameList() {
 }
 
 export const SET_CONTENT = 'ARTICLES/SET_CONTENT'
-export function loadContent(id) {
+export function loadContent(req, id) {
   return dispatch =>
     req
       .get('/Articles/AsSimpleJson', {

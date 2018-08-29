@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import { loadGameList } from '../actions'
 
 import Loader from '@/modules/ui/Loader'
+import req from '@/helpers/req'
 
 class List extends React.Component {
   componentDidMount() {
-    if (this.props.list.length === 0) this.props.loadGameList()
+    if (this.props.list.length === 0) this.props.loadGameList(req)
   }
 
   render() {

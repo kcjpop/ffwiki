@@ -11,7 +11,10 @@ function Loader({ loading, children, ...rest }) {
 
 Loader.propTypes = {
   loading: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 }
 
 export default Loader

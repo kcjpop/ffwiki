@@ -23,7 +23,7 @@ function Image(props) {
 }
 
 Image.propTypes = {
-  position: PropTypes.string.isRequired,
+  position: PropTypes.string,
   src: PropTypes.string.isRequired,
   caption: PropTypes.string,
   alt: PropTypes.string

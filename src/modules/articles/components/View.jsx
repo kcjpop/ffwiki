@@ -9,6 +9,7 @@ import Section from './Section'
 import Image from './Image'
 
 import Loader from '@/modules/ui/Loader'
+import req from '@/helpers/req'
 
 class View extends React.Component {
   state = { loading: false }
@@ -23,7 +24,7 @@ class View extends React.Component {
 
     this.setState({ loading: true })
     this.props
-      .loadContent(this.props.match.params.id)
+      .loadContent(req, this.props.match.params.id)
       .then(() => this.setState({ loading: false }))
       .catch(() => this.setState({ loading: false }))
   }
